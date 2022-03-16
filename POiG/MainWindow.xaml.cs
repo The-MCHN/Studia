@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +20,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         double number1 = 0;
         double number2 = 0;
         string operation = "";
@@ -44,40 +45,44 @@ namespace WpfApp1
         //    }
         //}
         
-
-        private void disp_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hej");
-        }
-
-
    
         private void equals_Click(object sender, RoutedEventArgs e)
         {
+            Button eq = sender as Button;
             switch (operation)
             {
                 case "+":
                     txtDisplay.Text = (number1 + number2).ToString();
                     number1 += number2;
+                    number2 = 0;
+                    
                     break;
                 case "-":
                     txtDisplay.Text = (number1 - number2).ToString();
                     number1 -= number2;
+                    number2 = 0;
                     break;
                 case "/":
                     if (number2 == 0)
                     {
                         txtDisplay.Text = "Nie dziel przez zero!";
+                        number1 = 0;
+                        number2 = 0;
+                        
                         break;
                     }
                     txtDisplay.Text = (number1 / number2).ToString();
                     number1 /= number2;
+                    number2 = 0;
                     break;
-                case "*":
+                case "x":
                     txtDisplay.Text = (number1 * number2).ToString();
                     number1 *= number2;
+                    number2 = 0;
                     break;
             }
+            operation = "";
+
         }
 
         private void one_Click(object sender, RoutedEventArgs e)
@@ -381,26 +386,32 @@ namespace WpfApp1
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            commaClicked = false;
-            help = -1;
-            operation = "+";
-            txtDisplay.Text = "0";
+           
+                commaClicked = false;
+                help = -1;
+                operation = "+";
+                txtDisplay.Text = "0";
+            
         }
 
         private void divide_Click(object sender, RoutedEventArgs e)
         {
-            commaClicked = false;
-            help = -1;
-            operation = "/";
-            txtDisplay.Text = "0";
+            
+                commaClicked = false;
+                help = -1;
+                operation = "/";
+                txtDisplay.Text = "0";
+            
         }
 
         private void multiply_Click(object sender, RoutedEventArgs e)
         {
-            commaClicked = false;
-            help = -1;
-            operation = "x";
-            txtDisplay.Text = "0";
+            
+                commaClicked = false;
+                help = -1;
+                operation = "x";
+                txtDisplay.Text = "0";
+            
         }
 
         private void subtract_Click(object sender, RoutedEventArgs e)
@@ -458,5 +469,6 @@ namespace WpfApp1
             }
             txtDisplay.Text = message;
         }
+  
     }
 }
