@@ -50,27 +50,47 @@ class KNN:
         for z in range(len(x)):
             distances.append(KNN.minkowski(sample, x.iloc[z], m))
 
-        # sort x by distance
-        for i in range(len(distances) - 1):
-            for j in range(0, len(distances) - i - 1):
-                if distances[j] > distances[j + 1]:
-                    distances[j], distances[j + 1] = distances[j + 1], distances[j]
-                    x.iloc[j], x.iloc[j+1] = x.iloc[j+1], x.iloc[j]
+        # sorting
+        KNN.quickSort(distances, x, 0, len(distances) - 1)
+
         # voting
         for i in range(0, k):
             classes[x.iloc[i].variety] += 1
 
-        # return result
-        print(max(classes, key=classes.get))
+        # print(max(classes, key=classes.get))
         return max(classes, key=classes.get)
+
+    @staticmethod
+    def partition(arr, org_arr, low, high):
+        i = low - 1
+        pivot = arr[high]
+
+        for j in range(low, high):
+
+            if arr[j] <= pivot:
+                i = i + 1
+                arr[i], arr[j] = arr[j], arr[i]
+                org_arr.iloc[i], org_arr.iloc[j] = org_arr.iloc[j], org_arr.iloc[i]
+
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        org_arr.iloc[i + 1], org_arr.iloc[high] = org_arr.iloc[high], org_arr.iloc[i + 1]
+        return i + 1
+
+    @staticmethod
+    def quickSort(arr, org_arr, low, high):
+        if len(arr) == 1:
+            return arr
+        if low < high:
+            pi = KNN.partition(arr, org_arr, low, high)
+
+            KNN.quickSort(arr, org_arr, low, pi - 1)
+            KNN.quickSort(arr, org_arr, pi + 1, high)
 
 
 iris1 = ProcessingData.shuffle(iris)
 iris1 = ProcessingData.normalize(iris1)
 irisTrain, irisTest = ProcessingData.splitSet(iris1, 0.7)
 
-print(len(irisTrain))
-print(len(irisTest))
 corrected = 0
 
 for e in range(len(irisTest)):
@@ -78,5 +98,4 @@ for e in range(len(irisTest)):
         corrected += 1
 
 accuracy = corrected / len(irisTest) * 100
-print(corrected)
 print(f"Accuracy: {accuracy:.2f}%")
