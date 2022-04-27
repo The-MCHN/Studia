@@ -1,0 +1,16 @@
+﻿<Window x:Class="QuizGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizGame"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock x:Name="Load_Text" Margin="237,44,-141.4,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="137" Width="698" FontSize="48" FontWeight="Bold"><Run Language="pl-pl" Text="Choose Quiz:"/></TextBlock>
+        <ListBox x:Name="Load_Quiz" Margin="10,124,0,75" HorizontalAlignment="Left" VerticalAlignment="Center" Width="774" Height="221"></ListBox>
+        <Button x:Name="Load_Button" Click="Load_Button_Click" Content="Load" HorizontalAlignment="Left" Margin="342,359,0,0" VerticalAlignment="Top" Height="32" Width="45" RenderTransformOrigin="-0.284,-0.233"/>
+        <Button x:Name="Choose_Button" Click="Choose_Button_Click" Content="Choose" HorizontalAlignment="Left" Margin="419,359,0,0" VerticalAlignment="Top" Height="32" Width="62" RenderTransformOrigin="-0.284,-0.233"/>
+
+    </Grid>
+</Window>
